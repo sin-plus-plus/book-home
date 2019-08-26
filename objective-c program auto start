@@ -12,15 +12,48 @@ int main(int argc, const char * argv[]) {
  
         NSString *path=[NSString stringWithFormat:@"/Users/mac/Library/LaunchAgents/"];
     //～/library/launchagents下是开机程序自启的路径
+    
         NSString *plist=[path stringByAppendingPathComponent:@"auto.plist"];//新建plist
+        
         NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
+        
         NSMutableArray *arr=[[NSMutableArray alloc]init];
+        
         [dict setObject:@"auto"  forKey:@"Label"];//pilst必修和label同名
+        
         [arr addObject:@"/Users/mac/Desktop/QQ.app/Contents/MacOS/QQ"];//要启动的程序二进制文件路径
+        
         [dict setObject:arr forKey:@"Program"];//加载二进制文件路径
+        
         [dict setObject:[NSNumber numberWithBool:true] forKey:@"RunAtLoad"];//自启
+        
         [dict setObject:[NSNumber numberWithBool:true] forKey:@"KeepAlive"];//活跃
+        
         [dict setObject:@"mac" forKey:@"UserName"];//用户
+        
         [dict writeToFile:plist atomically:NO];//写入
+        
     return 0;
 }
+
+----------------------------------------------------------------------
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>KeepAlive</key>
+	<true/>
+	<key>Label</key>
+	<string>com.cocoa.auto</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Users/mac/Desktop/QQ.app/Contents/MacOS/QQ</string>
+		<string>-runMode</string>
+		<string>autoLaunched</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>UserName</key>
+	<string>mac</string>
+</dict>
+</plist>
