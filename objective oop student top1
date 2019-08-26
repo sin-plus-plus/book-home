@@ -1,0 +1,151 @@
+//
+//  main.m
+//  self
+//
+//  Created by mac on 2019/8/24.
+//  Copyright © 2019年 mac. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface father : NSObject// nsobject是所有类的父类
+{
+    NSString *_name;//实例化必须用指针 必须手写set和get 使用self->调用
+    NSString *_sex; //标注下划线是为了区分set中的同名参赛
+
+    
+}
+
+- (void) one;//实例方法 通过实例化对象调用
++ (void) one; //类方法 也就是static静态方法 可直接用类名调用
+
+- (void)two;//为了实现重写父类
+@property NSString *name,*sex;//属性 通常情况会自动调用_name，_sex的set和get方法  可以用self.直接修改
+
+
+@end
+
+@implementation father
+- (void)one
+{
+    NSLog(@"这是一个实例方法");
+}
+
++ (void)one
+{
+    NSLog(@"这是一个类方法");
+}
+
+- (void)two
+{
+    NSLog(@"这是父类的第二个方法");
+}
+@end
+
+@interface son : father
+{
+     NSString *_work;
+     int _age;
+}
+
+@property NSString * work;
+@property int age;
+- (void)super1;
++ (void)super2;
+
+- (void)two;//覆盖父类的方法
+@end
+@implementation son
+-(void)setName:(NSString *)name setSex:(NSString *)sex setWork:(NSString*)work setAge:(int)age;
+{//成员变量的set方法 要求set+成员变量首字母大写 去除成员变量_
+    _name=name;
+    _work=work;
+    _sex=sex;
+    _age=age;
+}
+-(NSString*)name;//父类成员变量和子类成员变量的get方法
+{
+    return _name;
+    
+}
+-(NSString*)sex;//父类成员变量和子类成员变量的get方法
+{
+    return _sex;
+    
+}
+-(NSString*)work;//父类成员变量和子类成员变量的get方法
+{
+    return _work;
+    
+}
+-(int)age;//父类成员变量和子类成员变量的get方法
+{
+    return _age;
+    
+}
+- (void)super1
+{
+    [super one]; // 在实例化方法中调用super，调用父类的实例化方法
+}
+
++ (void)super2
+{
+    [super one]; // 在类方法中调用super，调用的时父类的类方法
+    
+}
+
+- (void)two
+{
+   
+    NSLog(@"这是子类重写父类的方法");
+    // [self walk];无限调用本方法
+}
+-(void)inita{//使用self
+    self->_name=@"abcd";//self->和self.可以互相修改 都是调用了set get方法
+    NSLog(@"%@",self.name);
+    self.age=33;
+    NSLog(@"%d",self->_age);
+}
+
+
+@end
+
+int main()
+{
+    father *f=[[father alloc]init];//实例化父类
+    [father one];//静态方法
+    [f one];//父类实例化方法
+    [f two];//父类方法
+    son *s=[[son alloc]init];//实例化子类
+    [s one];//子类实例化方法
+    [s two];//子类覆盖父类的方法
+    [s super1];//子类调用父类方法
+    [son super2];//子类静态方法
+    [s setName:@"aaa"setSex:@"bbb" setWork:@"ccc" setAge:14];//调用set
+    NSLog(@"%@%@%@%d",[s name],[s sex],[s work ],[s age]);//调用get
+    NSLog(@"%@%@%@%d",s.name,s.sex,s.work,s.age);//等同与self.xxx
+    [s inita];//self能直接修改set和get 的值
+    NSLog(@"%@%@%@%d",[s name],[s sex],[s work ],[s age]);//set和get的值已经被self修改
+    return 0;
+}
+
+--------------------------------------------------------------------------------------------------------
+
+
+
+
+2019-08-26 12:03:19.636302+0800 self[1363:45047] 这是一个类方法
+2019-08-26 12:03:19.636502+0800 self[1363:45047] 这是一个实例方法
+2019-08-26 12:03:19.636516+0800 self[1363:45047] 这是父类的第二个方法
+2019-08-26 12:03:19.636540+0800 self[1363:45047] 这是一个实例方法
+2019-08-26 12:03:19.636553+0800 self[1363:45047] 这是子类重写父类的方法
+2019-08-26 12:03:19.636577+0800 self[1363:45047] 这是一个实例方法
+2019-08-26 12:03:19.636614+0800 self[1363:45047] 这是一个类方法
+2019-08-26 12:03:19.636682+0800 self[1363:45047] aaabbbccc14
+2019-08-26 12:03:19.636706+0800 self[1363:45047] aaabbbccc14
+2019-08-26 12:03:19.636723+0800 self[1363:45047] abcd
+2019-08-26 12:03:19.636737+0800 self[1363:45047] 33
+2019-08-26 12:03:19.636750+0800 self[1363:45047] 33
+2019-08-26 12:03:19.636763+0800 self[1363:45047] abcd
+2019-08-26 12:03:19.636777+0800 self[1363:45047] abcdbbbccc33
+Program ended with exit code: 0
