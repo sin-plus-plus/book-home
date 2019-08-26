@@ -11,7 +11,7 @@
 @interface father : NSObject// nsobject是所有类的父类
 {
     NSString *_name;//实例化必须用指针 必须手写set和get 使用self->调用
-    NSString *_sex; //标注下划线是为了区分set中的同名参赛
+    NSString *_sex; //标注下划线是为了区分set中的同名参数
 
     
 }
@@ -57,7 +57,7 @@
 @end
 @implementation son
 -(void)setName:(NSString *)name setSex:(NSString *)sex setWork:(NSString*)work setAge:(int)age;
-{//成员变量的set方法 要求set+成员变量首字母大写 去除成员变量_
+{//成员变量的set方法 要求set+成员变量首字母大写 比成员变量少个_
     _name=name;
     _work=work;
     _sex=sex;
