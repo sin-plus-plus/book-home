@@ -16,7 +16,7 @@ int main(int argc, const char * argv[]) {
         NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
         NSMutableArray *arr=[[NSMutableArray alloc]init];
         [dict setObject:@"auto"  forKey:@"Label"];//pilst必修和label同名
-        [arr addObject:@"/Users/mac/Desktop/QQ.app/Contents/MacOS/QQ"];//二进制文件路径
+        [arr addObject:@"/Users/mac/Desktop/QQ.app/Contents/MacOS/QQ"];//要启动的程序二进制文件路径
         [dict setObject:arr forKey:@"Program"];//加载二进制文件路径
         [dict setObject:[NSNumber numberWithBool:true] forKey:@"RunAtLoad"];//自启
         [dict setObject:[NSNumber numberWithBool:true] forKey:@"KeepAlive"];//活跃
