@@ -1,0 +1,60 @@
+//
+//  main.m
+//  search
+//
+//  Created by mac on 2019/8/27.
+//  Copyright © 2019 mac. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        NSFileManager *fm;//文件管理器
+        
+        fm=[NSFileManager defaultManager];//文件管理器的默认方法
+        
+        NSString *path;//要查找的路径
+        
+        path=[@"~" stringByExpandingTildeInPath];//当前用户目录：/users/mac
+        
+        NSDirectoryEnumerator *d;//字典的枚举。当next每一次结束就自动查找下一个目录
+        
+        d=[fm enumeratorAtPath:path];//查找路径
+        
+        NSMutableArray *f;//可变的数值。用来添加文件名字
+        
+        f=[NSMutableArray arrayWithCapacity:42];//默认方法
+        
+        NSString *f2;//添加文件名字
+        while(f2=[d nextObject]){
+            if([[f2 pathExtension] isEqualToString:@"jpg"]){//匹配扩展名
+                [f addObject:f2];//添加到f2
+            }
+        }
+        
+        NSEnumerator *e;//创建一个输出的枚举
+        e=[f objectEnumerator];//将f的结果添加到e
+        while(f2=[e nextObject]){
+            NSLog(@"%@",f2);
+        }
+        NSLog(@"%@",path);
+    }
+    return 0;
+}
+--------------------------------------------------------------------------------
+2019-08-27 15:09:26.569093+0800 search[3080:92726] Desktop/Telegram.app/Contents/Resources/builtin-wallpaper-0.jpg
+2019-08-27 15:09:26.570174+0800 search[3080:92726] Desktop/QQ.app/Contents/Resources/MacQQ_icon_video@2x.jpg
+2019-08-27 15:09:26.570195+0800 search[3080:92726] Desktop/QQ.app/Contents/Resources/MacQQ_icon_GIF.jpg
+2019-08-27 15:09:26.570206+0800 search[3080:92726] Desktop/QQ.app/Contents/Resources/MacQQ_icon_video.jpg
+2019-08-27 15:09:26.570259+0800 search[3080:92726] Desktop/QQ.app/Contents/Resources/MacQQ_icon_GIF@2x.jpg
+2019-08-27 15:09:26.570275+0800 search[3080:92726] Desktop/QQ.app/Contents/Resources/test1.jpg
+2019-08-27 15:09:26.570283+0800 search[3080:92726] Desktop/QQ.app/Contents/Resources/test.jpg
+2019-08-27 15:09:26.570292+0800 search[3080:92726] Library/Developer/CoreSimulator/Devices/566DCF56-883D-400A-8B5D-0B6E5771FD58/data/Library/SpringBoard/LockBackgroundThumbnail.jpg
+2019-08-27 15:09:26.570301+0800 search[3080:92726] Library/Developer/CoreSimulator/Devices/FC676B70-5EB6-4695-8C2E-7856714D9A8F/data/Library/SpringBoard/LockBackgroundThumbnail.jpg
+2019-08-27 15:09:26.570310+0800 search[3080:92726] Library/Developer/CoreSimulator/Devices/50BA8972-21CD-404E-BE5E-C271B9144C68/data/Library/SpringBoard/LockBackgroundThumbnail.jpg
+2019-08-27 15:09:26.570588+0800 search[3080:92726] Library/Developer/CoreSimulator/Devices/E522D3FF-5205-486B-9BF8-D4FB3B6E7A4A/data/Library/SpringBoard/LockBackgroundThumbnail.jpg
+2019-08-27 15:09:26.570612+0800 search[3080:92726] Library/Developer/CoreSimulator/Devices/10D38D37-CF1C-41E8-9043-857B43439436/data/Library/SpringBoard/LockBackgroundThumbnail.jpg
+2019-08-27 15:09:26.570656+0800 search[3080:92726] Library/Android/sdk/tools/lib/monitor-x86_64/plugins/org.eclipse.ui.intro.universal_3.2.600.v20120912-155524/themes/circles/graphics/contentpage/wr_banner.jpg
+2019-08-27 15:09:26.599309+0800 search[3080:92726] /Users/mac
+Program ended with exit code: 0
