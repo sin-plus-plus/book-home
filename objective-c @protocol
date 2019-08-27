@@ -1,0 +1,98 @@
+//
+//  main.m
+//  category
+//
+//  Created by mac on 2019/8/27.
+//  Copyright © 2019 mac. All rights reserved.
+//
+
+
+
+/*
+了解@protocol 协议机制
+ @protocol类似于java的interface
+ @required必须实现
+ @optional 可不实现
+ objective-c不支持多重继承，但协议支持
+ @protocol可实例化
+ 如id<>,nsobject<>
+ */
+#import <Foundation/Foundation.h>
+
+@protocol draw
+
+@required
+
+-(void)draw;
+
+@optional
+
+-(NSString*)music;
+
+@end
+
+@protocol oilpaint <draw>
+
+@required
+
+-(void)oilpaint;
+
+@end
+
+@interface art : NSObject<oilpaint>//可多继承协议
+
+@end
+
+@implementation art
+
+-(void)draw{
+    
+    NSLog(@"我是画画的");
+    
+}
+-(void)oilpaint{
+    
+    NSLog(@"我是画油画的");
+
+}
+
+@end
+
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        // insert code here...
+        art *a=[[art alloc]init];
+    
+        id<draw> d=a;
+        
+        [d draw];
+        
+        NSObject<draw> *o=d;
+        
+        [o draw];
+        
+        NSObject<oilpaint>*b=d;
+        
+        [b draw];
+        
+        [b oilpaint];
+        
+        id<oilpaint>c=b;
+        
+        [c oilpaint];
+        
+        
+        
+    }
+
+    return 0;
+}
+
+
+----------------------------------------------------------------------------------
+2019-08-27 17:46:09.035382+0800 category[4522:139943] 我是画画的
+2019-08-27 17:46:09.035818+0800 category[4522:139943] 我是画画的
+2019-08-27 17:46:09.035848+0800 category[4522:139943] 我是画画的
+2019-08-27 17:46:09.035895+0800 category[4522:139943] 我是画油画的
+2019-08-27 17:46:09.035935+0800 category[4522:139943] 我是画油画的
+Program ended with exit code: 0
