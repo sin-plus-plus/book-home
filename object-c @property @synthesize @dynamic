@@ -1,0 +1,88 @@
+//
+//  main.m
+//  property
+//
+//  Created by mac on 2019/8/27.
+//  Copyright © 2019 mac. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+@interface people:NSObject
+{
+    NSString* name;//成员变量 没有set和get
+    
+}
+@property  NSString *name;//属性
+
+@property NSString *sex;
+
+-(NSString*)print:(NSString*)name;
+
+@end
+
+@implementation people
+
+@synthesize name=mingzi;//就是属性name的别名。name的set和get=mingzi
+
+-(NSString*)print:(NSString*)name{
+    self->mingzi=@"abcd";//这里等同于self->name
+    NSLog(@"%@aaa",mingzi);
+    
+    return name;
+}
+@dynamic sex;//很少用到 代表自己手动set和get
+
+@end
+
+
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        // insert code here...
+        people *man=[[people alloc]init];
+        NSLog(@"%@", man.name);//这里name还没有初始化。为null
+        
+        man.name=@"一二三";
+        
+        NSLog(@"%@", man.name);//一二三
+        
+         man.name=@"一二三1";
+          NSLog(@"%@", man.name);//一二三1
+         man.name=@"一二三3";
+        NSLog(@"%@", man.name);//一二三3
+        
+        [man print:man.name];//abcaaa
+        NSLog(@"%@", man.name);//abc
+        man.name=@"一二三2";
+        
+       NSLog(@"%@", man.name);//一二三2
+        
+        
+        //man.sex=@"女";报错
+ 
+    }
+    return 0;
+}
+
+--------------------------------------------------------------------------------------
+2019-08-27 20:34:59.572704+0800 property[6124:193566] (null)
+2019-08-27 20:34:59.573008+0800 property[6124:193566] 一二三
+2019-08-27 20:34:59.573040+0800 property[6124:193566] 一二三1
+2019-08-27 20:34:59.573051+0800 property[6124:193566] 一二三3
+2019-08-27 20:34:59.573065+0800 property[6124:193566] abcdaaa
+2019-08-27 20:34:59.573107+0800 property[6124:193566] abcd
+2019-08-27 20:34:59.573139+0800 property[6124:193566] 一二三2
+2019-08-27 20:34:59.573202+0800 property[6124:193566] -[people setSex:]: unrecognized selector sent to instance 0x100761eb0
+2019-08-27 20:34:59.573660+0800 property[6124:193566] *** Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '-[people setSex:]: unrecognized selector sent to instance 0x100761eb0'
+*** First throw call stack:
+(
+	0   CoreFoundation                      0x00007fff2bdafcfd __exceptionPreprocess + 256
+	1   libobjc.A.dylib                     0x00007fff56456a17 objc_exception_throw + 48
+	2   CoreFoundation                      0x00007fff2be29b06 -[NSObject(NSObject) __retain_OA] + 0
+	3   CoreFoundation                      0x00007fff2bd51b8f ___forwarding___ + 1485
+	4   CoreFoundation                      0x00007fff2bd51538 _CF_forwarding_prep_0 + 120
+	5   property                            0x0000000100001e09 main + 713
+	6   libdyld.dylib                       0x00007fff57c243d5 start + 1
+	7   ???                                 0x0000000000000001 0x0 + 1
+)
+libc++abi.dylib: terminating with uncaught exception of type NSException
+(lldb) 
