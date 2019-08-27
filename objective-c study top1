@@ -56,7 +56,10 @@
 - (void)two;//覆盖父类的方法
 @end
 @implementation son
--(void)setName:(NSString *)name setSex:(NSString *)sex setWork:(NSString*)work setAge:(int)age;
+-(void)setName:(NSString *)name 
+setSex:(NSString *)sex 
+setWork:(NSString*)work 
+setAge:(int)age;
 {//成员变量的set方法 要求set+成员变量首字母大写 比成员变量少个_
     _name=name;
     _work=work;
