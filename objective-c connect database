@@ -5,6 +5,8 @@
 //  Created by mac on 2019/8/28.
 //  Copyright © 2019 mac. All rights reserved.
 //  以打开safari的历史浏览记录为例
+//  safari原目录的数据库需要移植到别到目录才能打开
+//  chrome到数据库需要创建副本读取 否则是加密
 
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
@@ -17,7 +19,7 @@ int main(int argc, const char * argv[]) {
         
         NSString *home=NSHomeDirectory();//当前主目录
         
-        NSString *path1=[home stringByAppendingPathComponent:@"/Libaray/Safari/History.db"];
+        NSString *path1=[home stringByAppendingPathComponent:@"/Users/mac/Desktop/History.db"];
         //主目录+指定路径
  
         NSLog(@"%@",path1);
