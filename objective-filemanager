@@ -1,0 +1,67 @@
+//
+//  main.m
+//  filemanager
+//
+//  Created by mac on 2019/9/2.
+//  Copyright © 2019 mac. All rights reserved.
+//
+/*
+ filemanager的增删改查
+ */
+#import <Foundation/Foundation.h>
+#import "sqlite3.h"
+
+int main(int argc, const char * argv[]) {
+    
+    @autoreleasepool {
+        
+        NSFileManager *fm=[NSFileManager defaultManager];
+        
+        NSString *path=[NSString stringWithFormat:@"%@/Desktop/f.txt",NSHomeDirectory()];
+        
+       NSDictionary *dict=@{@"oyc":NSFileOwnerAccountName};//设置文件属性
+        
+        NSString *context=@"让我们荡起双桨";
+        
+        [fm createFileAtPath:path contents:context attributes:dict];//路径，内容，属性
+       
+        NSString *path1=[NSString stringWithFormat:@"%@/Dekstop/aaa.db",NSHomeDirectory()];
+        
+        NSString *path2=[NSString stringWithFormat:@"%@/Desktop/aaa1.db",NSHomeDirectory()];
+        
+         [fm moveItemAtPath:path1 toPath:path2 error:nil];//移动
+        
+         [fm copyItemAtPath:path1 toPath:path2 error:nil];//复制
+        
+         //[fm removeItemAtPath:path2  error:nil];//删除
+        
+        NSDictionary *dic = [fm attributesOfItemAtPath:path2 error:nil];
+        NSLog(@"%@",dic);//打印属性
+  
+    }
+    return 0;
+}
+
+------------------------------------------------------------------------------------------------
+2019-09-02 15:35:28.299233+0800 filemanager[4345:103327] {
+    NSFileCreationDate = "2019-09-02 03:52:14 +0000";
+    NSFileExtendedAttributes =     {
+        "com.apple.lastuseddate#PS" = <ec946c5d 00000000 30e6782d 00000000>;
+        "com.apple.metadata:_kMDItemUserTags" = <62706c69 73743030 a0080000 00000000 01010000 00000000 00010000 00000000 00000000 00000000 0009>;
+    };
+    NSFileExtensionHidden = 0;
+    NSFileGroupOwnerAccountID = 20;
+    NSFileGroupOwnerAccountName = staff;
+    NSFileHFSCreatorCode = 0;
+    NSFileHFSTypeCode = 0;
+    NSFileModificationDate = "2019-09-02 03:54:42 +0000";
+    NSFileOwnerAccountID = 501;
+    NSFileOwnerAccountName = mac;
+    NSFilePosixPermissions = 420;
+    NSFileReferenceCount = 1;
+    NSFileSize = 8192;
+    NSFileSystemFileNumber = 12886464461;
+    NSFileSystemNumber = 16777221;
+    NSFileType = NSFileTypeRegular;
+}
+Program ended with exit code: 0
