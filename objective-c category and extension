@@ -1,0 +1,124 @@
+/*
+类的头文件
+
+
+*/
+
+
+
+
+#ifndef son_h
+#define son_h
+
+
+#endif /* son_h */
+
+@interface son:NSObject
+@property NSString *sex;
+@property int age;
+-(id)init;
+@end
+
+-----------------------------------------------------------------------------------------------------------------
+/*
+类别的头文件
+
+*/
+
+
+#ifndef son_daughter_h
+#define son_daughter_h
+
+
+#endif /* son_daughter_h */
+#import "son.h"
+@interface son(daughter)
+-(void)daughter;
+@end
+
+----------------------------------------------------------------------------------------------------------------
+//
+//  main.m
+//  category and extension
+//
+//  Created by mac on 2019/9/2.
+//  Copyright © 2019 mac. All rights reserved.
+//
+/*
+ 
+类扩展其实就是匿名的类别
+ 可以增加属性
+ 
+ */
+
+#import <Foundation/Foundation.h>
+#import "son+daughter.h"
+@implementation son
+
+-(instancetype)init{//instancetype比id更适合返回值 init 必须按照一下方法构造
+    self=[super init];
+    if(self)
+    {
+    
+        _age=19;//setX=self.X=_X
+    
+    }
+     return self;
+}
+
+-(void)daughter{//是类别 不能添加属性 且类别会覆盖掉同名函数
+    NSLog(@"是女儿");
+    
+}
+
+@end
+
+@interface area:NSObject
+
+@end
+
+@interface area ()
+
+@property int width;
+@property int hight;
+
+-(int)real;
+
+@end
+
+@implementation area
+
+-(int)real{
+    
+    return _width*_hight;
+}
+
+@end
+
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        // insert code here...
+        son *s=[[son alloc]init];
+        
+        [s init];
+        
+        NSLog(@"%d",s.age);
+        
+        [s daughter];
+        
+        area *a=[[area alloc]init];
+        
+        a.width=6;
+        a.hight=7;
+        [a real];
+        NSLog(@"%d",[a real]);
+    
+    }
+    return 0;
+}
+
+----------------------------------------------------------------------------------------------------------------
+2019-09-02 19:53:22.956373+0800 category and extension[15678:195566] 19
+2019-09-02 19:53:22.956637+0800 category and extension[15678:195566] 是女儿
+2019-09-02 19:53:22.956690+0800 category and extension[15678:195566] 42
+Program ended with exit code: 0
