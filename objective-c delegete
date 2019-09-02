@@ -1,0 +1,63 @@
+//
+//  main.m
+//  delegete
+//
+//  Created by mac on 2019/9/2.
+//  Copyright © 2019 mac. All rights reserved.
+//
+/*
+ 委托与代理
+ 其中@protocol相当于java接口类 要子类去实现
+ 儿子想看书 叫妈妈去拿
+ 委托是拿，委托人是儿子，委托对象是妈妈，实现目的是看书。
+ */
+
+#import <Foundation/Foundation.h>
+
+@protocol book  <NSObject>
+
+-(void) watch;
+
+@end
+
+@interface son : NSObject
+
+@property id<book> delegete;
+
+-(void)take;
+
+@end
+
+@implementation son
+
+-(void) take{
+    
+    NSLog(@"拿书来看");
+}
+-(void) watch{
+    
+    NSLog(@"儿子叫%@",_delegete);
+    
+    [self take];
+}
+
+@end
+
+int main(int argc, const char * argv[]) {
+    
+    @autoreleasepool {
+        
+        son *s=[[son alloc]init];
+        
+        s.delegete=@"妈妈";
+      
+        [s watch ];
+    }
+    
+    return 0;
+}
+
+--------------------------------------------------------------------------------------------
+2019-09-02 10:07:27.589916+0800 delegete[1235:16871] 儿子叫妈妈
+2019-09-02 10:07:27.590160+0800 delegete[1235:16871] 拿书来看
+Program ended with exit code: 0
