@@ -1,0 +1,10 @@
+需要在ios越狱的情况下实现 
+一、ios越狱：
+可借助爱思助手一键越狱
+如果ios版本在爱思助手不支持越狱的情况下 可下载impactor手动越狱
+如果impactor出现173等错误 需要关闭双重验证或者重新注册App_id
+使用uncOver越狱，在cydia下载openSSH
+注：要pc端和iophone在统一wifi下可实现
+查找iPhone的wifi地址
+在pc端su ssh root@xxx.xxx.x.x 
+默认密码:apline
